@@ -1,0 +1,37 @@
+{
+  "name": "fidelity_nodejs",
+  "version": "0.0.1",
+  "description": "node js training",
+  "main": "index.js",
+  "scripts": {
+    "babel-node": "babel-node --presets='@babel/preset-env' --ignore='foo|bar|baz'",
+    "start": "nodemon --exec npm run babel-node -- index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/the-special-character/fidelity_Nodejs.git"
+  },
+  "keywords": [
+    "node",
+    "javascript",
+    "api",
+    "express"
+  ],
+  "author": "Yagnesh Modh <yagnesh.modh@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/the-special-character/fidelity_Nodejs/issues"
+  },
+  "homepage": "https://github.com/the-special-character/fidelity_Nodejs#readme",
+  "devDependencies": {
+    "@babel/core": "^7.20.5",
+    "@babel/node": "^7.20.5",
+    "@babel/preset-env": "^7.20.2",
+    "@faker-js/faker": "^7.6.0",
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "csvtojson": "^2.0.10"
+  }
+}
