@@ -1,7 +1,11 @@
-const express = require("express");
+import express from "express";
+import productsRoutes from "./routes/products.route";
+import userRoutes from "./routes/user.route";
 require("dotenv").config();
 
 const app = express();
+
+// app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
 
@@ -9,13 +13,15 @@ if (process.env.NODE_ENV === "development") {
   console.log("check env...");
 }
 
+// routes
 app.get("/", (req, res) => {
   res.send("Hello express");
 });
 
-app.get("/products", (req, res) => {
-  res.send("products info");
-});
+// Midleware
+app.use("/user", userRoutes);
+
+app.use("/products", productsRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server Started on port ${PORT}`);
