@@ -1,0 +1,28 @@
+{
+  "name": "fidelity_nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "npx env-cmd -f .env.dev node server.js",
+    "start:prod": "npx env-cmd -f .env.prod node server.js",
+    "start:stage": "npx env-cmd -f .env.stage node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/the-special-character/fidelity_Nodejs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/the-special-character/fidelity_Nodejs/issues"
+  },
+  "homepage": "https://github.com/the-special-character/fidelity_Nodejs#readme",
+  "dependencies": {
+    "config": "^3.3.8",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  }
+}
