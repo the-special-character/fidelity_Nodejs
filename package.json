@@ -5,9 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "npx env-cmd -f .env.dev node server.js",
-    "start:prod": "npx env-cmd -f .env.prod node server.js",
-    "start:stage": "npx env-cmd -f .env.stage node server.js"
+    "start:dev": "npx env-cmd -f .env.dev nodemon --exec npm run babel-node --  server.js",
+    "start:prod": "npx env-cmd -f .env.prod nodemon --exec npm run babel-node --  server.js",
+    "start:stage": "npx env-cmd -f .env.stage nodemon --exec npm run babel-node --  server.js"
   },
   "repository": {
     "type": "git",
@@ -24,5 +24,9 @@
     "config": "^3.3.8",
     "dotenv": "^16.0.3",
     "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.5",
+    "@babel/node": "^7.20.5"
   }
 }
