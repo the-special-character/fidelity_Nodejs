@@ -13,6 +13,10 @@ app.get("/", (req, res) => {
   res.send("Hello express");
 });
 
+app.get("/products", (req, res) => {
+  res.send("products info");
+});
+
 app.listen(PORT, () => {
   console.log(`Server Started on port ${PORT}`);
 });

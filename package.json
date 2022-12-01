@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "babel-node": "babel-node --presets='@babel/preset-env' --ignore='foo|bar|baz'",
     "start:dev": "npx env-cmd -f .env.dev nodemon --exec npm run babel-node --  server.js",
     "start:prod": "npx env-cmd -f .env.prod nodemon --exec npm run babel-node --  server.js",
     "start:stage": "npx env-cmd -f .env.stage nodemon --exec npm run babel-node --  server.js"
@@ -27,6 +28,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
-    "@babel/node": "^7.20.5"
+    "@babel/node": "^7.20.5",
+    "@babel/preset-env": "^7.20.2",
+    "nodemon": "^2.0.20"
   }
 }
