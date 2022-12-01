@@ -1,17 +1,29 @@
 const fs = require("fs");
 const csv = require("csvtojson");
 const { Transform } = require("stream");
+const { pipeline } = require("stream/promises");
 
-const main = () => {
+const main = async () => {
   const readStream = fs.createReadStream("./data/import.csv", {
     highWaterMark: 100,
   });
+
+  const writeStream = fs.WriteStream("./data/export.csv");
 
   const customTransform = new Transform({
     objectMode: true,
     transform(chunk, enc, cb) {
       const { email, ...rest } = chunk;
       cb(null, rest);
+
+      // fetch("https://jsonplaceholder.typicode.com/users/1")
+      //   .then((res) => res.json())
+      //   .then((json) => {
+      //     cb(null, { ...chunk, ...json });
+      //   })
+      //   .catch((err) => {
+      //     cb(err);
+      //   });
     },
   });
 
@@ -22,35 +34,38 @@ const main = () => {
         cb(null);
         return;
       }
+      console.log(chunk);
       cb(null, chunk);
     },
   });
 
-  //   const writeStream = fs.createWriteStream("./data/export.csv");
+  await pipeline(readStream, csv({ delimiter: ";" }, { objectMode: true }));
 
-  readStream
-    .pipe(
-      csv(
-        {
-          delimiter: ";",
-        },
-        {
-          objectMode: true,
-        }
-      )
-    )
-    .pipe(customTransform)
-    .pipe(activeData)
-    .on("data", (data) => {
-      console.log(data);
-    })
-    .on("error", (error) => {
-      console.log(error);
-    });
+  console.log("pipeline completed");
 
-  readStream.on("end", () => {
-    console.log("reading completed");
-  });
+  // readStream
+  //   .pipe(
+  //     csv(
+  //       {
+  //         delimiter: ";",
+  //       },
+  //       {
+  //         objectMode: true,
+  //       }
+  //     )
+  //   )
+  //   .pipe(customTransform)
+  //   .pipe(activeData)
+  //   .on("data", (data) => {
+  //     console.log(data);
+  //   })
+  //   .on("error", (error) => {
+  //     console.log(error);
+  //   });
+
+  // readStream.on("end", () => {
+  //   console.log("reading completed");
+  // });
 
   //   writeStream.on("finish", () => {
   //     console.log("writing completed");
@@ -70,3 +85,19 @@ const main = () => {
 };
 
 main();
+
+// benifit of pipe
+
+// -> help to avoid memory leak
+// -> easy to use
+// -> complex error management
+//  clean code
+
+// can use event listners
+
+// benifit of pipeline
+// -> help to avoid memory leak
+// -> easier to use
+//  clean code
+// -> complex error management
+// can't use event listners
