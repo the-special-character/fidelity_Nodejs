@@ -9,11 +9,4 @@ const userSchema = joi.object({
     .required(),
 });
 
-const { error, value } = userSchema.validate(
-  {},
-  {
-    messages,
-  }
-);
-
 export default userSchema;
