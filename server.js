@@ -1,9 +1,8 @@
 import express from "express";
 import cors from "cors";
-// import productsRoutes from "./routes/products.route";
-// import userRoutes from "./routes/user.route";
 import db from "./db";
 import authRouter from "./routes/auth.route";
+import courseRouter from "./routes/course.route";
 
 require("dotenv").config();
 
@@ -17,8 +16,7 @@ app.use(express.json());
 
 // Midleware
 app.use("/auth", authRouter);
-// app.use("/user", userRoutes);
-// app.use("/products", productsRoutes);
+app.use("/course", courseRouter);
 
 app.listen(PORT, () => {
   console.log(`Server Started on port ${PORT}`);
