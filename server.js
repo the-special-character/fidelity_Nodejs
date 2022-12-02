@@ -1,27 +1,24 @@
 import express from "express";
-import productsRoutes from "./routes/products.route";
-import userRoutes from "./routes/user.route";
+import cors from "cors";
+// import productsRoutes from "./routes/products.route";
+// import userRoutes from "./routes/user.route";
+import db from "./db";
+import authRouter from "./routes/auth.route";
+
 require("dotenv").config();
-
-const app = express();
-
-// app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
 
-if (process.env.NODE_ENV === "development") {
-  console.log("check env...");
-}
+db.connectDB();
 
-// routes
-app.get("/", (req, res) => {
-  res.send("Hello express");
-});
+const app = express();
+app.use(cors());
+app.use(express.json());
 
 // Midleware
-app.use("/user", userRoutes);
-
-app.use("/products", productsRoutes);
+app.use("/auth", authRouter);
+// app.use("/user", userRoutes);
+// app.use("/products", productsRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server Started on port ${PORT}`);

@@ -5,8 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "babel-node": "babel-node --presets='@babel/preset-env' --ignore='foo|bar|baz'",
-    "start:dev": "npx env-cmd -f .env.dev nodemon --exec npm run babel-node --  server.js",
+    "start:dev": "npx env-cmd -f .env.dev nodemon --exec babel-node server.js",
     "start:prod": "npx env-cmd -f .env.prod nodemon --exec npm run babel-node --  server.js",
     "start:stage": "npx env-cmd -f .env.stage nodemon --exec npm run babel-node --  server.js"
   },
@@ -22,12 +21,16 @@
   },
   "homepage": "https://github.com/the-special-character/fidelity_Nodejs#readme",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "config": "^3.3.8",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "joi": "^17.7.0"
+    "joi": "^17.7.0",
+    "mongoose": "^6.7.5"
   },
   "devDependencies": {
+    "@babel/cli": "^7.19.3",
     "@babel/core": "^7.20.5",
     "@babel/node": "^7.20.5",
     "@babel/preset-env": "^7.20.2",
