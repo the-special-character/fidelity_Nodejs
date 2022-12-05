@@ -5,15 +5,16 @@ export const registerSchema = joi.object({
   email: joi.string().email().required(),
   password: joi
     .string()
-    .regex(RegExp("^(?=.*[A-Za-z])(?=.*d)[A-Za-zd]{8,}$"))
+    // .regex(RegExp("^(?=.*[A-Za-z])(?=.*d)[A-Za-zd]{8,}$"))
     .required(),
   isActive: joi.boolean(),
+  role: joi.string(),
 });
 
 export const loginSchema = joi.object({
   email: joi.string().email().required(),
   password: joi
     .string()
-    .regex(RegExp("^(?=.*[A-Za-z])(?=.*d)[A-Za-zd]{8,}$"))
+    // .regex(RegExp("^(?=.*[A-Za-z])(?=.*d)[A-Za-zd]{8,}$"))
     .required(),
 });

@@ -3,6 +3,8 @@ import cors from "cors";
 import db from "./db";
 import authRouter from "./routes/auth.route";
 import courseRouter from "./routes/course.route";
+import passport from "passport";
+import "./auth/authStrategy";
 
 require("dotenv").config();
 
@@ -12,7 +14,28 @@ db.connectDB();
 
 const app = express();
 app.use(cors());
+
+app.use(require("cookie-parser")());
+// middleware
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
+
+// // middlware
 app.use(express.json());
+
+app.use(
+  require("express-session")({
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Midleware
 app.use("/auth", authRouter);

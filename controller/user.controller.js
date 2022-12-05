@@ -1,22 +1,18 @@
 import User from "../models/users.model";
-import bcrypt from "bcrypt";
+import passport from "passport";
 
 class UserController {
   static login = async (req, res) => {
-    try {
-      const { email, password } = req.body;
-      const user = await User.findOne({ email });
+    return passport.authenticate("local", function (error, user, info) {
+      if (error) {
+        return res.status(401).send(error.message);
+      }
       if (!user) {
-        throw new Error("Email is not available");
+        return res.status(401).send("No such user exist");
       }
-      const isValidPassword = await bcrypt.compare(password, user.password);
-      if (!isValidPassword) {
-        throw new Error("password is not valid");
-      }
-      return res.send(user);
-    } catch (error) {
-      return res.status(400).send(error.message);
-    }
+      const accessToken = user.generateToken();
+      return res.status(200).send({ accessToken, user });
+    })(req, res);
   };
 
   static register = async (req, res) => {
